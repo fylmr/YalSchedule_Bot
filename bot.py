@@ -1,20 +1,59 @@
 # -*- coding: utf-8 -*-
 import config
 import telebot
+from telebot import types
+import sqlite3
+import dbstuff
+
+# @bot.message_handler(regexp="(Пон)|(Втор)|(Сред)|(Четв)|(Пят)|(Суб)".decode('utf-8'))
 
 bot = telebot.TeleBot(config.token)
 
 
-# @bot.message_handler(content_types=["text"])
-# def repeat_all_messages(message):
-#     bot.send_message(message.chat.id, message.text)
-#     print message.text
+@bot.message_handler(commands=['start', 'help'])
+def send_welcome(message):
+    bot.send_message(
+        message.chat.id, "Привет. Здесь можно узнать расписание пар.")
+
+    choose_day(message)
 
 
-@bot.message_handler(commands=['test'])
-def test_func(message):
-    bot.send_message(message.chat.id, "YOU DARE TO TEST ME")
+def choose_day(message):
+    """
+    Открыть клавиатуру с выбором
+    дня недели
+    """
+
+    markup = types.ReplyKeyboardMarkup(row_width=2)
+
+    itembtn1 = types.KeyboardButton('Понедельник')
+    itembtn2 = types.KeyboardButton('Вторник')
+    itembtn3 = types.KeyboardButton('Среда')
+    itembtn4 = types.KeyboardButton('Четверг')
+    itembtn5 = types.KeyboardButton('Пятница')
+    itembtn6 = types.KeyboardButton('Суббота')
+
+    markup.add(itembtn1, itembtn2, itembtn3, itembtn4, itembtn5, itembtn6)
+
+    bot.send_message(message.chat.id, "Выбери день:",
+                     reply_markup=markup)
 
 
-if __name__ == '__main__':
-    bot.polling(none_stop=True)
+@bot.message_handler(regexp="(Пон)|(Втор)|(Сред)|(Четв)|(Пят)|(Суб)"
+                     .decode('utf-8'))
+def show_day(message):
+    """
+    Показать расписание на конкретный день,
+    если получили в ответе сообщение с днём
+    """
+    markup = types.ReplyKeyboardRemove(selective=False)
+    bot.send_message(message.chat.id, "Расписание на", reply_markup=markup)
+    dbstuff.connect()
+
+
+@bot.message_handler(commands=['start', 'help'])
+def get_today_schedule(message):
+    pass
+
+
+bot.polling(none_stop=True)
