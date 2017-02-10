@@ -1,0 +1,5 @@
+# -*- coding: utf-8 -*-
+
+import telebot
+
+token = '350501294:AAEaIxCT-1OUJmhiHGPLDKAGZw9RU3K89i4'
