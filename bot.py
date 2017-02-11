@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
+from telebot import types
 import config
 import telebot
-from telebot import types
-import sqlite3
 import dbstuff
-
-# @bot.message_handler(regexp="(Пон)|(Втор)|(Сред)|(Четв)|(Пят)|(Суб)".decode('utf-8'))
 
 bot = telebot.TeleBot(config.token)
 
@@ -46,9 +43,9 @@ def show_day(message):
     Показать расписание на конкретный день,
     если получили в ответе сообщение с днём
     """
+
     markup = types.ReplyKeyboardRemove(selective=False)
-    bot.send_message(message.chat.id, "Расписание на", reply_markup=markup)
-    dbstuff.connect()
+    bot.send_message(message.chat.id, "Расписание:", reply_markup=markup)
 
 
 @bot.message_handler(commands=['start', 'help'])

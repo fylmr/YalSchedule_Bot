@@ -2,13 +2,13 @@ BEGIN TRANSACTION;
 CREATE TABLE Subjects (
 	subjectId integer PRIMARY KEY AUTOINCREMENT,
 	name text,
-	professorId text
+	professorId text,
+	FOREIGN KEY(professorId) REFERENCES Professors(professorId)
 );
 
 CREATE TABLE Professors (
 	professorId integer PRIMARY KEY AUTOINCREMENT,
-	professorname text,
-	subjectId integer
+	professorname text
 );
 
 CREATE TABLE `Monday` (
@@ -17,5 +17,5 @@ CREATE TABLE `Monday` (
 	`room`	INTEGER,
 	`professorname`	TEXT
 );
-INSERT INTO `Monday` VALUES ('13:40','Calculus',213,'Aleshnikova');
+
 COMMIT;

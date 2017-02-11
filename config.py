@@ -2,4 +2,4 @@
 
 token = '350501294:AAEaIxCT-1OUJmhiHGPLDKAGZw9RU3K89i4'
 
-db = "schedule_db.db"
+db = "sch.db"

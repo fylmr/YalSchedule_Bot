@@ -5,14 +5,26 @@ import config
 
 
 def connect():
-    con = sqlite3.connect(config.db)
-    return con
+    return sqlite3.connect(config.db)
 
 
-def get_everything(con):
+def get_everything(tablename):
+    """
+    select * from X
+    Returns a list of tuples
+    """
+    con = connect()
+
     cur = con.cursor()
-    cur.execute("select * from Monday")
-    print cur.fetchall()
+    cur.execute("select * from " + tablename)
+    res = cur.fetchall()
+
+    cur.close()
+    return res
 
 
-get_everything(connect())
+def ():
+    pass
+
+
+print get_everything("monday")
