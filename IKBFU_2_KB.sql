@@ -1,11 +1,21 @@
 BEGIN TRANSACTION;
-CREATE TABLE "IKBFU_2_KB" (
-	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-	`Subject`	TEXT,
-	`StartTime`	TEXT,
-	`Room`	TEXT,
-	`Professor`	TEXT
+CREATE TABLE Subjects (
+	subjectId integer PRIMARY KEY AUTOINCREMENT,
+	name text,
+	professorId text
 );
-INSERT INTO `IKBFU_2_KB` VALUES (2,'CVFT','12:00','205','--');
-INSERT INTO `IKBFU_2_KB` VALUES (4,'Math','10:10','205','Aleshnikova');
+
+CREATE TABLE Professors (
+	professorId integer PRIMARY KEY AUTOINCREMENT,
+	professorname text,
+	subjectId integer
+);
+
+CREATE TABLE `Monday` (
+	`starttime`	TEXT,
+	`subject`	TEXT,
+	`room`	INTEGER,
+	`professorname`	TEXT
+);
+INSERT INTO `Monday` VALUES ('13:40','Calculus',213,'Aleshnikova');
 COMMIT;
