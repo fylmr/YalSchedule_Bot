@@ -19,7 +19,37 @@ def get_everything(tablename):
     cur = con.cursor()
     cur.execute("select * from " + tablename)
     res = cur.fetchall()
+
     return res
 
 
-print get_everything("professors")
+def get_day(day):
+    con = connect()
+
+    cur = con.cursor()
+    cur.execute("select * from Schedule where day = ?", str(day))
+
+    return cur.fetchall()
+
+
+def get_professor_name(professorId):
+    con = connect()
+
+    cur = con.cursor()
+    cur.execute("select professorname from Professors where professorId = ?",
+                str(professorId))
+
+    return cur.fetchall()[0][0]
+
+
+def get_subject_name(subjectId):
+    con = connect()
+
+    cur = con.cursor()
+    cur.execute("select name from Subjects where subjectId = " +
+                str(subjectId))
+
+    return cur.fetchall()[0][0]
+
+
+print get_subject_name(17)
