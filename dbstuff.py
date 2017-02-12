@@ -12,19 +12,14 @@ def get_everything(tablename):
     """
     select * from X
     Returns a list of tuples
+    NOT UNICODE
     """
     con = connect()
 
     cur = con.cursor()
     cur.execute("select * from " + tablename)
     res = cur.fetchall()
-
-    cur.close()
     return res
 
 
-def ():
-    pass
-
-
-print get_everything("monday")
+print get_everything("professors")
