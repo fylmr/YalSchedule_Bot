@@ -14,6 +14,7 @@ def get_everything(tablename):
     Returns a list of tuples
     NOT UNICODE
     """
+
     con = connect()
 
     cur = con.cursor()
@@ -24,6 +25,12 @@ def get_everything(tablename):
 
 
 def get_day(day):
+    """
+    select * from Schedule where day = INT
+    Returns a tuple of lists
+    NOT UNICODE
+    """
+
     con = connect()
 
     cur = con.cursor()
@@ -33,23 +40,46 @@ def get_day(day):
 
 
 def get_professor_name(professorId):
+    """
+    select professorname from Professors where professorId = ?
+    Returns a string
+    UNICODE
+    """
+
     con = connect()
 
     cur = con.cursor()
     cur.execute("select professorname from Professors where professorId = ?",
                 str(professorId))
 
-    return cur.fetchall()[0][0]
+    return cur.fetchone()[0]
 
 
 def get_subject_name(subjectId):
+    """
+    select name from Subjects where subjectId =
+    Returns a string
+    UNICODE
+    """
+
     con = connect()
 
     cur = con.cursor()
     cur.execute("select name from Subjects where subjectId = " +
                 str(subjectId))
 
-    return cur.fetchall()[0][0]
+    return cur.fetchone()[0]
 
 
-print get_subject_name(17)
+def get_starttime(lessonNumber):
+    con = connect()
+
+    cur = con.cursor()
+    cur.execute(
+        "select starttime from starttimes where lessonnumber = " +
+        str(lessonNumber))
+
+    return cur.fetchone()[0]
+
+
+print get_starttime(1)
