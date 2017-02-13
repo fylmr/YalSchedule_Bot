@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-from telebot import types
+from pyTelegramBotAPI import types
 import config
-import telebot
+import pyTelegramBotAPI
 import dbstuff
 
-bot = telebot.TeleBot(config.token)
+bot = pyTelegramBotAPI.TeleBot(config.token)
 
 
 @bot.message_handler(commands=['start', 'help'])
