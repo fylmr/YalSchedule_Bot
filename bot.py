@@ -45,7 +45,8 @@ def day_choose_keyboard(message):
                      .decode('utf-8'))
 def show_day(message):
     keyboard_remove(message)
-    bot.send_message(message.chat.id, show_day_parser(message.text))
+    bot.send_message(message.chat.id, show_day_parser(
+        message.text), parse_mode="Markdown")
 
 
 def show_day_parser(message):
@@ -53,9 +54,9 @@ def show_day_parser(message):
     res = ''
     for i in msg:
         res += dbstuff.get_starttime(i[1])
-        res += '. '
+        res += ' *'
         res += dbstuff.get_subject_name(i[2])
-        res += ' '
+        res += '* '
         res += str(i[3])
         res += ' '
         res += "\n"
