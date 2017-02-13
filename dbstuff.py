@@ -80,6 +80,3 @@ def get_starttime(lessonNumber):
         str(lessonNumber))
 
     return cur.fetchone()[0]
-
-
-print get_starttime(1)
