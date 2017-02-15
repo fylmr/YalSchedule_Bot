@@ -4,6 +4,15 @@ from telebot import types
 import config
 import telebot
 import dbstuff
+import socket
+import os
+
+sock = socket.socket()
+port = int(os.environ.get('PORT', 17995))
+sock.bind(('', port))
+sock.listen(1)
+conn, addr = sock.accept()
+
 
 bot = telebot.TeleBot(config.token)
 
@@ -89,3 +98,9 @@ def day_to_int(day):
 
 
 bot.polling(none_stop=True)
+
+while True:
+    data = conn.recv(1024)
+    if not data:
+        break
+    conn.send(data.upper())
